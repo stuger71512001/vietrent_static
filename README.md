@@ -1,0 +1,1 @@
+# vietrent_static
