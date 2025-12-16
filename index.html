@@ -25,67 +25,88 @@
     </script>
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
         .gradient-bg { background: linear-gradient(180deg, #f0f9ff 0%, #fff 100%); }
-        /* Ẩn thanh cuộn khi mở modal */
         body.modal-open { overflow: hidden; }
     </style>
 </head>
 <body class="text-gray-800 bg-white flex flex-col min-h-screen">
 
-    <!-- Navbar -->
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center sticky top-0 bg-white/95 backdrop-blur z-40 border-b border-gray-100">
-        <a href="#" class="font-bold text-2xl text-brand flex items-center gap-2 hover:opacity-80 transition">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
-                <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
-            </svg>
-            VietRent
-        </a>
-        <div class="hidden md:flex space-x-8 font-medium">
-            <a href="#loi-ich" class="text-gray-600 hover:text-brand transition">Lợi ích</a>
-            <a href="#tinh-nang" class="text-gray-600 hover:text-brand transition">Tính năng</a>
-            <a href="#bao-mat" class="text-gray-600 hover:text-brand transition">Bảo mật</a>
-        </div>
-              <!-- Right Side Buttons -->
-        <div class="flex items-center gap-4">
-            <!-- Nút Đăng nhập Mới -->
-            <a href="https://app.vietrent.de/login" class="text-brand font-semibold hover:text-brand-light transition hidden md:block">
-                Đăng nhập
-            </a>
-            
-            <!-- Nút Đăng ký -->
-            <a href="https://app.vietrent.de/register" class="bg-brand text-white px-5 py-2.5 rounded-full font-semibold hover:bg-brand-light transition shadow-md whitespace-nowrap">
-                Đăng ký ngay miễn phí
-            </a>
+    <!-- Navbar Responsive -->
+    <nav class="sticky top-0 bg-white/95 backdrop-blur z-40 border-b border-gray-100 shadow-sm">
+        <div class="container mx-auto px-4 md:px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="#" class="font-bold text-2xl text-brand flex items-center gap-2 hover:opacity-80 transition shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
+                        <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
+                    </svg>
+                    VietRent
+                </a>
+
+                <!-- Desktop Menu (Hidden on Mobile) -->
+                <div class="hidden md:flex space-x-8 font-medium items-center">
+                    <a href="#loi-ich" class="text-gray-600 hover:text-brand transition">Lợi ích</a>
+                    <a href="#tinh-nang" class="text-gray-600 hover:text-brand transition">Tính năng</a>
+                    <a href="#bao-mat" class="text-gray-600 hover:text-brand transition">Bảo mật</a>
+                </div>
+
+                <!-- Desktop Buttons (Hidden on Mobile) -->
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="https://app.vietrent.de/login" class="text-brand font-semibold hover:text-brand-light transition px-3 py-2">
+                        Đăng nhập
+                    </a>
+                    <a href="https://vietrent.de" class="bg-brand text-white px-5 py-2.5 rounded-full font-semibold hover:bg-brand-light transition shadow-md whitespace-nowrap">
+                        Đăng ký ngay
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button (Hamburger) -->
+                <button id="mobile-menu-btn" class="md:hidden text-brand focus:outline-none p-2" onclick="toggleMobileMenu()">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
 
-        
+        <!-- Mobile Menu Panel (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 pt-2 pb-6 shadow-lg absolute w-full left-0 top-full">
+            <div class="flex flex-col space-y-3 font-medium text-lg">
+                <a href="#loi-ich" onclick="toggleMobileMenu()" class="block py-2 text-gray-600 hover:text-brand">Lợi ích</a>
+                <a href="#tinh-nang" onclick="toggleMobileMenu()" class="block py-2 text-gray-600 hover:text-brand">Tính năng</a>
+                <a href="#bao-mat" onclick="toggleMobileMenu()" class="block py-2 text-gray-600 hover:text-brand">Bảo mật</a>
+                <hr class="border-gray-200 my-2">
+                <a href="https://app.vietrent.de/login" class="block py-2 text-brand text-center border border-brand rounded-lg">Đăng nhập</a>
+                <a href="https://vietrent.de" class="block py-2 bg-brand text-white text-center rounded-lg shadow">Đăng ký ngay</a>
+            </div>
+        </div>
     </nav>
 
     <!-- Main Content Wrapper -->
     <main class="flex-grow">
         <!-- Hero Section -->
-        <header class="gradient-bg py-20 lg:py-28">
-            <div class="container mx-auto px-6 text-center">
-                <div class="inline-block bg-blue-50 px-4 py-1 rounded-full shadow-sm text-sm font-semibold text-brand mb-6 border border-blue-100">
+        <header class="gradient-bg py-16 md:py-24 lg:py-28">
+            <div class="container mx-auto px-4 md:px-6 text-center">
+                <div class="inline-block bg-blue-50 px-3 py-1 md:px-4 rounded-full shadow-sm text-xs md:text-sm font-semibold text-brand mb-6 border border-blue-100">
                     🚀 Bản thử nghiệm (MVP) đã sẵn sàng
                 </div>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-gray-900">
-                    Nền tảng quản lý nhà cho thuê <br>
+                <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-gray-900">
+                    Quản lý nhà cho thuê <br class="hidden md:block">
                     dành cho <span class="text-brand">người Việt tại Đức</span> 🇻🇳 🇩🇪
                 </h1>
-                <p class="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
-                    Quản lý từ 1-30 căn hộ đơn giản, minh bạch và đúng luật. <br>
+                <p class="text-base md:text-lg text-gray-600 mb-8 max-w-2xl mx-auto px-2">
+                    Quản lý từ 1-30 căn hộ đơn giản, minh bạch và đúng luật. <br class="hidden md:block">
                     Tạm biệt Excel rắc rối, an tâm kê khai thuế.
                 </p>
-                <div class="flex flex-col md:flex-row justify-center gap-4">
-                    <a href="https://app.vietrent.de/register" class="bg-brand text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-brand-light transition shadow-lg ring-offset-2 hover:ring-2 ring-brand">
+                <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4">
+                    <a href="https://vietrent.de" class="bg-brand text-white px-6 py-3 md:px-8 md:py-4 rounded-lg font-bold text-base md:text-lg hover:bg-brand-light transition shadow-lg ring-offset-2 hover:ring-2 ring-brand">
                         Đăng ký trải nghiệm sớm
                     </a>
-                    <a href="#tinh-nang" class="bg-white text-gray-700 border border-gray-300 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-50 transition">
+                    <a href="#tinh-nang" class="bg-white text-gray-700 border border-gray-300 px-6 py-3 md:px-8 md:py-4 rounded-lg font-bold text-base md:text-lg hover:bg-gray-50 transition">
                         Tìm hiểu thêm
                     </a>
                 </div>
@@ -93,35 +114,36 @@
         </header>
 
         <!-- Pain Points -->
-        <section id="loi-ich" class="py-20 bg-white scroll-mt-24">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-12 text-brand">VietRent giúp bạn giải quyết vấn đề gì?</h2>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="p-8 bg-slate-50 rounded-xl border border-slate-100 hover:shadow-lg transition group">
-                        <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">🤯</div>
-                        <h3 class="font-bold text-xl mb-3 text-brand">Quản lý rời rạc</h3>
-                        <p class="text-gray-600 leading-relaxed">Bạn đang mệt mỏi vì dùng Excel, sổ tay hay quá nhiều phần mềm rời rạc để quản lý danh sách nhà?</p>
+        <section id="loi-ich" class="py-16 md:py-20 bg-white scroll-mt-24">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 text-brand">VietRent giúp bạn giải quyết vấn đề gì?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                    <div class="p-6 md:p-8 bg-slate-50 rounded-xl border border-slate-100 hover:shadow-lg transition group">
+                        <div class="text-3xl md:text-4xl mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">🤯</div>
+                        <h3 class="font-bold text-lg md:text-xl mb-3 text-brand">Quản lý rời rạc</h3>
+                        <p class="text-sm md:text-base text-gray-600 leading-relaxed">Bạn đang mệt mỏi vì dùng Excel, sổ tay hay quá nhiều phần mềm rời rạc để quản lý danh sách nhà?</p>
                     </div>
-                    <div class="p-8 bg-slate-50 rounded-xl border border-slate-100 hover:shadow-lg transition group">
-                        <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">💸</div>
-                        <h3 class="font-bold text-xl mb-3 text-brand">Khó theo dõi dòng tiền</h3>
-                        <p class="text-gray-600 leading-relaxed">Thường xuyên quên hoặc mất thời gian kiểm tra ai đã đóng tiền thuê, chi phí sửa chữa là bao nhiêu?</p>
+                    <div class="p-6 md:p-8 bg-slate-50 rounded-xl border border-slate-100 hover:shadow-lg transition group">
+                        <div class="text-3xl md:text-4xl mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">💸</div>
+                        <h3 class="font-bold text-lg md:text-xl mb-3 text-brand">Khó theo dõi dòng tiền</h3>
+                        <p class="text-sm md:text-base text-gray-600 leading-relaxed">Thường xuyên quên hoặc mất thời gian kiểm tra ai đã đóng tiền thuê, chi phí sửa chữa là bao nhiêu?</p>
                     </div>
-                    <div class="p-8 bg-slate-50 rounded-xl border border-slate-100 hover:shadow-lg transition group">
-                        <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">⚖️</div>
-                        <h3 class="font-bold text-xl mb-3 text-brand">Lo lắng về luật Đức</h3>
-                        <p class="text-gray-600 leading-relaxed">Sợ sai sót giấy tờ, quy định pháp luật Đức (DSGVO) và gặp rắc rối khi báo cáo thuế (Finanzamt)?</p>
+                    <div class="p-6 md:p-8 bg-slate-50 rounded-xl border border-slate-100 hover:shadow-lg transition group">
+                        <div class="text-3xl md:text-4xl mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">⚖️</div>
+                        <h3 class="font-bold text-lg md:text-xl mb-3 text-brand">Lo lắng về luật Đức</h3>
+                        <p class="text-sm md:text-base text-gray-600 leading-relaxed">Sợ sai sót giấy tờ, quy định pháp luật Đức (DSGVO) và gặp rắc rối khi báo cáo thuế (Finanzamt)?</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Features -->
-        <section id="tinh-nang" class="py-20 bg-slate-50 scroll-mt-24">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-4 text-brand">Tính năng chính</h2>
-                <p class="text-center text-gray-600 mb-12">Mọi thứ bạn cần trong một hệ thống duy nhất</p>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <section id="tinh-nang" class="py-16 md:py-20 bg-slate-50 scroll-mt-24">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 text-brand">Tính năng chính</h2>
+                <p class="text-center text-gray-600 mb-10 md:mb-12">Mọi thứ bạn cần trong một hệ thống duy nhất</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    <!-- Feature Items - Giữ nguyên nhưng chỉnh padding responsive -->
                     <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition border-t-4 border-brand">
                         <div class="text-brand mb-3"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg></div>
                         <h3 class="font-bold text-lg mb-2">Quản lý Bất động sản</h3>
@@ -157,32 +179,32 @@
         </section>
 
         <!-- Trust & Security -->
-        <section id="bao-mat" class="py-20 bg-brand text-white scroll-mt-24">
-            <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
+        <section id="bao-mat" class="py-16 md:py-20 bg-brand text-white scroll-mt-24">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                     <div>
-                        <h2 class="text-3xl font-bold mb-6">Bảo mật & Tuân thủ DSGVO</h2>
-                        <ul class="space-y-4">
+                        <h2 class="text-2xl md:text-3xl font-bold mb-6">Bảo mật & Tuân thủ DSGVO</h2>
+                        <ul class="space-y-4 text-sm md:text-base">
                             <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-accent mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <svg class="w-6 h-6 text-brand-accent mr-3 mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 <span>Lưu trữ dữ liệu tại <strong>Server ở Đức (EU)</strong>.</span>
                             </li>
                             <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-accent mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <svg class="w-6 h-6 text-brand-accent mr-3 mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 <span>Tuân thủ tuyệt đối quy định <strong>DSGVO / GDPR</strong>.</span>
                             </li>
                             <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-accent mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <svg class="w-6 h-6 text-brand-accent mr-3 mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 <span>Phân quyền người dùng rõ ràng (Admin, Owner).</span>
                             </li>
                         </ul>
                     </div>
-                    <div class="bg-white/10 p-8 rounded-xl border border-white/20 backdrop-blur-sm">
-                        <h3 class="font-bold text-xl mb-4">Ai nên sử dụng VietRent?</h3>
-                        <ul class="space-y-4 text-blue-100">
-                            <li class="flex items-center gap-2"><span class="bg-brand-accent w-2 h-2 rounded-full"></span> Người Việt sở hữu nhà cho thuê tại Đức</li>
-                            <li class="flex items-center gap-2"><span class="bg-brand-accent w-2 h-2 rounded-full"></span> Gia đình quản lý tài sản chung</li>
-                            <li class="flex items-center gap-2"><span class="bg-brand-accent w-2 h-2 rounded-full"></span> Chủ nhà muốn làm ăn <strong>minh bạch – đúng luật</strong></li>
+                    <div class="bg-white/10 p-6 md:p-8 rounded-xl border border-white/20 backdrop-blur-sm">
+                        <h3 class="font-bold text-lg md:text-xl mb-4">Ai nên sử dụng VietRent?</h3>
+                        <ul class="space-y-4 text-blue-100 text-sm md:text-base">
+                            <li class="flex items-center gap-2"><span class="bg-brand-accent w-2 h-2 rounded-full shrink-0"></span> Người Việt sở hữu nhà cho thuê tại Đức</li>
+                            <li class="flex items-center gap-2"><span class="bg-brand-accent w-2 h-2 rounded-full shrink-0"></span> Gia đình quản lý tài sản chung</li>
+                            <li class="flex items-center gap-2"><span class="bg-brand-accent w-2 h-2 rounded-full shrink-0"></span> Chủ nhà muốn làm ăn <strong>minh bạch – đúng luật</strong></li>
                         </ul>
                     </div>
                 </div>
@@ -190,11 +212,11 @@
         </section>
 
         <!-- CTA Section -->
-        <section class="py-20 text-center bg-gray-50">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold mb-6 text-brand">Bạn muốn trải nghiệm sớm & góp ý tính năng?</h2>
-                <p class="text-gray-600 mb-8 max-w-xl mx-auto">VietRent không chỉ là phần mềm, mà là nền tảng lâu dài cho quản lý tài sản của bạn.</p>
-                <a href="https://app.vietrent.de/register" class="inline-block bg-brand text-white px-10 py-4 rounded-lg font-bold text-xl hover:bg-brand-light transition shadow-lg transform hover:-translate-y-1">
+        <section class="py-16 md:py-20 text-center bg-gray-50">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-brand">Bạn muốn trải nghiệm sớm?</h2>
+                <p class="text-gray-600 mb-8 max-w-xl mx-auto text-sm md:text-base">VietRent không chỉ là phần mềm, mà là nền tảng lâu dài cho quản lý tài sản của bạn.</p>
+                <a href="https://vietrent.de" class="inline-block bg-brand text-white px-8 py-3 md:px-10 md:py-4 rounded-lg font-bold text-lg hover:bg-brand-light transition shadow-lg transform hover:-translate-y-1">
                     Đăng ký ngay hôm nay
                 </a>
             </div>
@@ -203,13 +225,13 @@
 
     <!-- FOOTER với Legal Links -->
     <footer class="bg-gray-100 py-10 border-t border-gray-200">
-        <div class="container mx-auto px-6 text-center">
+        <div class="container mx-auto px-4 md:px-6 text-center">
             <p class="text-brand font-bold text-lg mb-2">VietRent</p>
             <p class="text-sm text-gray-500 mb-6">
                 &copy; 2024 VietRent. Quản lý nhà cho thuê, an tâm tại Đức.
             </p>
             
-            <!-- Legal Links -->
+            <!-- Legal Links Responsive -->
             <div class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 text-sm text-gray-500">
                 <button onclick="openModal('impressum-modal')" class="hover:text-brand underline decoration-gray-400">Impressum</button>
                 <button onclick="openModal('agb-modal')" class="hover:text-brand underline decoration-gray-400">AGB</button>
@@ -221,14 +243,14 @@
     <!-- MODALS (Cửa sổ bật lên) -->
 
     <!-- 1. Modal Impressum -->
-    <div id="impressum-modal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div id="impressum-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true">
         <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity backdrop-blur-sm" onclick="closeModal('impressum-modal')"></div>
-        <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 max-h-[80vh] overflow-y-auto">
+        <div class="flex min-h-full items-center justify-center p-4 text-center">
+            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-full max-w-lg">
+                <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 max-h-[85vh] overflow-y-auto">
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold leading-6 text-brand" id="modal-title">Impressum</h3>
-                        <button onclick="closeModal('impressum-modal')" class="text-gray-400 hover:text-gray-500">
+                        <h3 class="text-xl font-bold text-brand">Impressum</h3>
+                        <button onclick="closeModal('impressum-modal')" class="text-gray-400 hover:text-gray-500 p-2">
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                         </button>
                     </div>
@@ -259,12 +281,12 @@
     <!-- 2. Modal AGB -->
     <div id="agb-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true">
         <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity backdrop-blur-sm" onclick="closeModal('agb-modal')"></div>
-        <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+        <div class="flex min-h-full items-center justify-center p-4 text-center">
+            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-full max-w-lg">
                 <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold leading-6 text-brand">Allgemeine Geschäftsbedingungen (AGB)</h3>
-                        <button onclick="closeModal('agb-modal')" class="text-gray-400 hover:text-gray-500">
+                        <h3 class="text-xl font-bold text-brand">Allgemeine Geschäftsbedingungen</h3>
+                        <button onclick="closeModal('agb-modal')" class="text-gray-400 hover:text-gray-500 p-2">
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                         </button>
                     </div>
@@ -279,12 +301,12 @@
     <!-- 3. Modal Datenschutz -->
     <div id="datenschutz-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true">
         <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity backdrop-blur-sm" onclick="closeModal('datenschutz-modal')"></div>
-        <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl">
-                <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 max-h-[80vh] overflow-y-auto">
+        <div class="flex min-h-full items-center justify-center p-4 text-center">
+            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-full max-w-2xl">
+                <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 max-h-[85vh] overflow-y-auto">
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold leading-6 text-brand">Datenschutzerklärung (DSGVO)</h3>
-                        <button onclick="closeModal('datenschutz-modal')" class="text-gray-400 hover:text-gray-500">
+                        <h3 class="text-xl font-bold text-brand">Datenschutzerklärung (DSGVO)</h3>
+                        <button onclick="closeModal('datenschutz-modal')" class="text-gray-400 hover:text-gray-500 p-2">
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                         </button>
                     </div>
@@ -298,7 +320,7 @@
                         E-Mail: kontakt@vietrent.de</p>
 
                         <p><strong>3. Datenerfassung auf unserer Website</strong></p>
-                        <p>Wir erfassen keine personenbezogenen Daten, es sei denn, Sie stellen uns diese freiwillig zur Verfügung (z. B. per E-Mail Kontakt oder Anmeldeformular auf externen Seiten). Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.</p>
+                        <p>Wir erfassen keine personenbezogenen Daten, es sei denn, Sie stellen uns diese freiwillig zur Verfügung. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.</p>
 
                         <p><strong>4. Hosting</strong></p>
                         <p>Wir hosten unsere Website bei einem externen Dienstleister (Hoster). Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. Der Serverstandort ist Deutschland/EU.</p>
@@ -311,19 +333,29 @@
         </div>
     </div>
 
-    <!-- Script xử lý Modal -->
+    <!-- JavaScript Logic -->
     <script>
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        }
+
+        // Modal Functions
         function openModal(modalId) {
             document.getElementById(modalId).classList.remove('hidden');
-            document.body.classList.add('modal-open'); // Khóa cuộn trang chính
+            document.body.classList.add('modal-open'); 
         }
 
         function closeModal(modalId) {
             document.getElementById(modalId).classList.add('hidden');
-            document.body.classList.remove('modal-open'); // Mở lại cuộn trang chính
+            document.body.classList.remove('modal-open'); 
         }
 
-        // Đóng modal khi nhấn phím ESC
         document.addEventListener('keydown', function(event) {
             if (event.key === "Escape") {
                 const modals = document.querySelectorAll('[id$="-modal"]');
